@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -u
 
 # special thanks!: https://gist.github.com/inductor/32116c486095e5dde886b55ff6e568c8
 
@@ -34,8 +34,7 @@ esac
 # region : set variables
 
 # Set global variables
-TARGET_BRANCH=$2
-KUBE_API_SERVER_VIP=192.168.8.100
+KUBE_API_SERVER_VIP=192.168.100.100
 VIP_INTERFACE=ens19
 NODE_IPS=( 192.168.8.121 192.168.8.122 192.168.8.123 )
 EXTERNAL_KUBE_API_SERVER="$(tr -dc '[:lower:]' </dev/urandom | head -c 1)$(tr -dc '[:lower:]0-9' </dev/urandom | head -c 7)-api.k8s.com"
@@ -211,10 +210,10 @@ apt-get update && apt-get -y install keepalived
 
 cat > /etc/keepalived/keepalived.conf <<EOF
 # Define the script used to check if haproxy is still working
-vrrp_script chk_haproxy { 
+vrrp_script chk_haproxy {
     script "sudo /usr/bin/killall -0 haproxy"
-    interval 2 
-    weight 2 
+    interval 2
+    weight 2
 }
 # Configuration for Virtual Interface
 vrrp_instance LB_VIP {
