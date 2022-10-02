@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # region : set variables
-TARGET_BRANCH=main
 TEMPLATE_VMID=9050
 CLOUDINIT_IMAGE_TARGET_VOLUME=qnapiscsi02
 TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
@@ -117,7 +116,7 @@ runcmd:
   - su - cloudinit -c "chmod 600 ~/.ssh/authorized_keys"
   # run install scripts
   - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/scripts/k8s-node-setup.sh > ~/k8s-node-setup.sh"
-  - su - cloudinit -c "sudo bash ~/k8s-node-setup.sh ${vmname} ${TARGET_BRANCH}"
+  - su - cloudinit -c "sudo bash ~/k8s-node-setup.sh ${vmname}"
   # change default shell to bash
   - chsh -s $(which bash) cloudinit
 EOF
