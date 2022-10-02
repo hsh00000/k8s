@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # region : set variables
-TARGET_BRANCH=$1
+TARGET_BRANCH=main
 TEMPLATE_VMID=9050
 CLOUDINIT_IMAGE_TARGET_VOLUME=qnapiscsi02
 TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
