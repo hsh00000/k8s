@@ -7,7 +7,7 @@ TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
 BOOT_IMAGE_TARGET_VOLUME=QnapNFS
 SNIPPET_TARGET_VOLUME=QnapNFS
 SNIPPET_TARGET_PATH=/mnt/pve/${SNIPPET_TARGET_VOLUME}/snippets
-REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/hsh00000/k8s/${TARGET_BRANCH}"
+REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/hsh00000/k8s/main"
 VM_LIST=(
     # ---
     # vmid:       proxmox上でVMを識別するID
