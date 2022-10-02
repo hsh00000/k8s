@@ -328,4 +328,19 @@ sudo mkdir -p "$HOME"/.kube
 sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
 sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
 
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+case $1 in
+    k8s-controller-01)
+        kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+        ;;
+    k8s-controller-02)
+        ;;
+    k8s-controller-03)
+        ;;
+    k8s-worker-0*)
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
+
