@@ -324,9 +324,11 @@ EOF
 # Install Kubernetes without kube-proxy
 kubeadm init --config "$HOME"/init_kubeadm.yaml --skip-phases=addon/kube-proxy --ignore-preflight-errors=NumCPU,Mem
 
-mkdir -p "$HOME"/.kube
-cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
-chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
+sudo mkdir -p "$HOME"/.kube
+sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
+sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
+
+sudo su -
 
 # クラスタ初期セットアップ時に helm　を使用して CNI と ArgoCD をクラスタに導入する
 # それ以外のクラスタリソースは ArgoCD によって本リポジトリから自動で導入される
