@@ -34,9 +34,10 @@ esac
 # region : set variables
 
 # Set global variables
+TARGET_BRANCH=$2
 KUBE_API_SERVER_VIP=192.168.100.100
 VIP_INTERFACE=ens19
-NODE_IPS=( 192.168.8.121 192.168.8.122 192.168.8.123 )
+NODE_IPS=( 192.168.100.121 192.168.100.122 192.168.100.123 )
 EXTERNAL_KUBE_API_SERVER="$(tr -dc '[:lower:]' </dev/urandom | head -c 1)$(tr -dc '[:lower:]0-9' </dev/urandom | head -c 7)-api.k8s.com"
 
 # set per-node variables
@@ -404,5 +405,19 @@ discovery:
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 EOF
+
+# install ansible
+sudo apt-get install -y ansible git sshpass
+
+# export ansible.cfg target
+export ANSIBLE_CONFIG="$HOME"/kube-cluster-on-proxmox/ansible/ansible.cfg
+
+# clone repo
+git clone -b "${TARGET_BRANCH}" https://github.com/unchama/kube-cluster-on-proxmox.git "$HOME"/kube-cluster-on-proxmox
+
+# run ansible-playbook
+ansible-galaxy role install -r "$HOME"/kube-cluster-on-proxmox/ansible/roles/requirements.yaml
+ansible-galaxy collection install -r "$HOME"/kube-cluster-on-proxmox/ansible/roles/requirements.yaml
+ansible-playbook -i "$HOME"/kube-cluster-on-proxmox/ansible/hosts/k8s-servers/inventory "$HOME"/kube-cluster-on-proxmox/ansible/site.yaml
 
 # endregion
