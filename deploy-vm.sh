@@ -38,9 +38,8 @@ VM_LIST=(
 wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 
 # create a new VM and attach Network Adaptor
-# vmbr0=Service Network Segment (192.168.8.0/24)
-# vmbr1=Storage Network Segment (192.168.100.0/24)
-qm create $TEMPLATE_VMID --cores 2 --memory 4096 --net0 virtio,bridge=vmbr1,tag=8 --net1 virtio,bridge=vmbr0 --name k8s-controller-template
+# vmbr0=Service Network Segment (192.168.100.0/24)
+# vmbr1=Storage Network Segment (192.168.8.0/24)
 
 # import the downloaded disk to $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME storage
 qm importdisk $TEMPLATE_VMID jammy-server-cloudimg-amd64.img $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME
