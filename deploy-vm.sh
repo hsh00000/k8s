@@ -152,9 +152,6 @@ EOF
 # ----- #
         # END irregular indent because heredoc
 
-        # set snippet to vm
-        ssh -n "${targetip}" qm set "${vmid}" --cicustom "user=${SNIPPET_TARGET_VOLUME}:snippets/${vmname}-user.yaml,network=${SNIPPET_TARGET_VOLUME}:snippets/${vmname}-network.yaml"
-
     done
 done
 
