@@ -76,16 +76,18 @@ do
     do
         # clone from template
         # in clone phase, can't create vm-disk to local volume
-        qm clone "${TEMPLATE_VMID}" "${vmid}" --name "${vmname}" --full true --target "${targethost}"
+        qm clone "${TEMPLATE_VMID}" "${vmid}" --name "${vmname}" --full true --target prox01
 
         # set compute resources
-        ssh -n "${targetip}" qm set "${vmid}" --cores "${cpu}" --memory "${mem}"
+        qm set "${vmid}" --cores "${cpu}" --memory "${mem}"
 
         # move vm-disk to local
-        ssh -n "${targetip}" qm move-disk "${vmid}" scsi0 "${BOOT_IMAGE_TARGET_VOLUME}" --delete true
+        qm move-disk "${vmid}" scsi0 "${BOOT_IMAGE_TARGET_VOLUME}" --delete true
 
         # resize disk (Resize after cloning, because it takes time to clone a large disk)
-        ssh -n "${targetip}" qm resize "${vmid}" scsi0 30G
+        qm resize "${vmid}" scsi0 30G
+        
+        qm migrate "${vmid}" "${targethost}"
 
         # create snippet for cloud-init(user-config)
         # START irregular indent because heredoc
