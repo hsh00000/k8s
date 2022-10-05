@@ -101,7 +101,7 @@ chpasswd:
   expire: False
 users:
   - default
-  - name: shunta
+  - name: cloudinit
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
     # mkpasswd --method=SHA-512 --rounds=4096
