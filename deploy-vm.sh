@@ -2,7 +2,7 @@
 
 # region : set variables
 TEMPLATE_VMID=9050
-CLOUDINIT_IMAGE_TARGET_VOLUME=qnapiscsi02
+CLOUDINIT_IMAGE_TARGET_VOLUME=QnapNFS
 TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
 BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
 SNIPPET_TARGET_VOLUME=QnapNFS
@@ -23,9 +23,9 @@ VM_LIST=(
     "2001 k8s-controller-01 2    4096  192.168.100.121 192.168.8.121 192.168.100.1 prox01"
     "2002 k8s-controller-02 2    4096  192.168.100.122 192.168.8.122 192.168.100.2 prox02"
     "2003 k8s-controller-03 2    4096  192.168.100.123 192.168.8.123 192.168.100.2 prox02"
-    "2101 k8s-worker-01 4    4096 192.168.100.151 192.168.8.151 192.168.100.1 prox01"
-    "2102 k8s-worker-02 4    4096 192.168.100.152 192.168.8.152 192.168.100.2 prox02"
-    "2103 k8s-worker-03 4    4096 192.168.100.153 192.168.8.153 192.168.100.3 prox03"
+    "2101 k8s-worker-01 2    4096 192.168.100.151 192.168.8.151 192.168.100.1 prox01"
+    "2102 k8s-worker-02 2    4096 192.168.100.152 192.168.8.152 192.168.100.2 prox02"
+    "2103 k8s-worker-03 2    4096 192.168.100.153 192.168.8.153 192.168.100.3 prox03"
 )
 
 # endregion
@@ -101,7 +101,7 @@ chpasswd:
   expire: False
 users:
   - default
-  - name: cloudinit
+  - name: shunta
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
     # mkpasswd --method=SHA-512 --rounds=4096
