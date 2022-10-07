@@ -328,19 +328,33 @@ sudo mkdir -p "$HOME"/.kube
 sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
 sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
 
-case $1 in
-    k8s-controller-01)
-        kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-        ;;
-    k8s-controller-02)
-        ;;
-    k8s-controller-03)
-        ;;
-    k8s-worker-0*)
-        ;;
-    *)
-        exit 1
-        ;;
-esac
 
+# Install Helm CLI
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+# Install Cilium Helm chart
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium \
+    --namespace kube-system \
+    --set kubeProxyReplacement=strict \
+    --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
+    --set k8sServicePort=8443
+
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cluster-wide-apps
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-k8s-endpoint
+  namespace: cluster-wide-apps
+type: Opaque
+stringData:
+  fqdn: "${EXTERNAL_KUBE_API_SERVER}"
+  port: "8443"
+EOF
 
