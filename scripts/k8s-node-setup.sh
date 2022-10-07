@@ -340,16 +340,6 @@ helm install cilium cilium/cilium \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
     --set k8sServicePort=8443
 
-# Install ArgoCD Helm chart
-helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd \
-    --version 5.5.4 \
-    --create-namespace \
-    --namespace argocd \
-    --values https://raw.githubusercontent.com/hsh00000/k8s/main/k8s-manifests/argocd-helm-chart-values.yaml
-helm install argocd argo/argocd-apps \
-    --version 0.0.1 \
-    --values https://raw.githubusercontent.com/hsh00000/k8s/main/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
