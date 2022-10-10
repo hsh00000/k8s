@@ -333,7 +333,6 @@ helm install cilium cilium/cilium \
     --set k8sServicePort=8443
 
 
-helm install prometheus prometheus-community/kube-prometheus-stack --namespace prometheus
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
