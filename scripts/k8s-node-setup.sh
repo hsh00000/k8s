@@ -411,5 +411,9 @@ ansible-galaxy role install -r "$HOME"/k8s/ansible/roles/requirements.yaml
 ansible-galaxy collection install -r "$HOME"/k8s/ansible/roles/requirements.yaml
 ansible-playbook -i "$HOME"/k8s/ansible/hosts/k8s-servers/inventory "$HOME"/k8s/ansible/site.yaml
 
+sudo sed -i -e "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
+
+sudo systemctl restart ssh
+
 # endregion
 
