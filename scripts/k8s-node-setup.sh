@@ -283,7 +283,7 @@ KUBEADM_BOOTSTRAP_TOKEN=$(openssl rand -hex 3).$(openssl rand -hex 8)
 
 # Set init configuration for the first control plane
 cat > "$HOME"/init_kubeadm.yaml <<EOF
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
 bootstrapTokens:
 - token: "$KUBEADM_BOOTSTRAP_TOKEN"
@@ -293,29 +293,21 @@ nodeRegistration:
   criSocket: "unix:///var/run/containerd/containerd.sock"
   kubeletExtraArgs:
     feature-gates: "DelegateFSGroupToCSIDriver=false"
----
-apiVersion: kubeadm.k8s.io/v1beta3
+---    
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
-networking:
-  serviceSubnet: "10.96.0.0/16"
-  podSubnet: "10.128.0.0/16"
 kubernetesVersion: "v1.25.2"
 controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:8443"
 apiServer:
   certSANs:
-  - "${EXTERNAL_KUBE_API_SERVER}" # generate random FQDN to prevent malicious DoS attack
-  extraArgs:
-    feature-gates: "DelegateFSGroupToCSIDriver=false"
-controllerManager:
-  extraArgs:
-    bind-address: "0.0.0.0"
-    feature-gates: "DelegateFSGroupToCSIDriver=false"
-scheduler:
-  extraArgs:
-    bind-address: "0.0.0.0"
-    feature-gates: "DelegateFSGroupToCSIDriver=false"
+  - 192.168.100.121
+  - 192.168.100.122
+  - 192.168.100.123
+networking:
+  serviceSubnet: "10.96.0.0/16"
+  podSubnet: "10.128.0.0/16"
 ---
-apiVersion: kubelet.config.k8s.io/v1beta1
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: KubeletConfiguration
 cgroupDriver: "systemd"
 protectKernelDefaults: true
