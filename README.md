@@ -62,6 +62,9 @@ Proxmox環境でサクッと作ってサクっと壊せる高可用性なkuberne
  1. proxmoxのホストコンソール上で`deploy-vm.sh`を実行すると、各種VMが沸き、クラスタの初期セットアップ、ArgoCDの導入などが行われます。`TARGET_BRANCH`はデプロイ対象のコードが反映されたブランチ名に変更してください。
 
     ```sh
+    任意
+    wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+    
     export TARGET_BRANCH=main
     /bin/bash <(curl -s https://raw.githubusercontent.com/unchama/kube-cluster-on-proxmox/${TARGET_BRANCH}/deploy-vm.sh) ${TARGET_BRANCH}
     ```
