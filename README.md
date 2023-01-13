@@ -65,8 +65,7 @@ Proxmox環境でサクッと作ってサクっと壊せる高可用性なkuberne
     任意
     wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
     
-    export TARGET_BRANCH=main
-    /bin/bash <(curl -s https://raw.githubusercontent.com/unchama/kube-cluster-on-proxmox/${TARGET_BRANCH}/deploy-vm.sh) ${TARGET_BRANCH}
+    /bin/bash <(curl -s https://raw.githubusercontent.com/hsh00000/k8s/main/deploy-vm.sh)
     ```
 
     `deploy-vm.sh`ではProxmoxホスト間でSSH接続を行っています。クラスタ構成済みのProxmoxホストを前提としているため追加の認証情報の入力は不要ですが、Proxmoxホストを新規もしくはクリーンインストールした後に`deploy-vm.sh`を実行する場合、ホスト公開鍵の登録を確認するプロンプトが出る場合がありますので対応してください。
