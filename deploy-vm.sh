@@ -39,7 +39,7 @@ VM_LIST=(
 # vmbr0=Service Network Segment (192.168.100.0/24)
 # vmbr1=Storage Network Segment (192.168.8.0/24)
 
-qm create $TEMPLATE_VMID --cores 2 --memory 4096 --net0 virtio,bridge=vmbr2 --net1 virtio,bridge=vmbr1,tag=8 --name k8s-node-template
+qm create $TEMPLATE_VMID --cores 2 --memory 4096 --net0 virtio,bridge=vmbr2 --net1 virtio,bridge=vmbr2,tag=8 --name k8s-node-template
 
 # import the downloaded disk to $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME storage
 qm importdisk $TEMPLATE_VMID jammy-server-cloudimg-amd64.img $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME
