@@ -34,8 +34,6 @@ VM_LIST=(
 
 # region : create template-vm
 
-# download the image(ubuntu 22.04 LTS)
-wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 
 # create a new VM and attach Network Adaptor
 # vmbr0=Service Network Segment (192.168.100.0/24)
@@ -62,7 +60,6 @@ qm set $TEMPLATE_VMID --serial0 socket --vga serial0
 qm template $TEMPLATE_VMID
 
 # cleanup
-rm jammy-server-cloudimg-amd64.img
 
 # endregion
 
