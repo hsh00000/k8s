@@ -7,7 +7,6 @@ TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=iscsi-102-LVM
 BOOT_IMAGE_TARGET_VOLUME=iscsi-102-LVM
 SNIPPET_TARGET_VOLUME=TrueNAS-NFS
 SNIPPET_TARGET_PATH=/mnt/pve/${SNIPPET_TARGET_VOLUME}/snippets
-REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/hsh00000/k8s/main"
 VM_LIST=(
     # ---
     # vmid:       proxmox上でVMを識別するID
@@ -115,7 +114,7 @@ runcmd:
   - su - cloudinit -c "curl -sS https://github.com/kory33.keys >> ~/.ssh/authorized_keys"
   - su - cloudinit -c "chmod 600 ~/.ssh/authorized_keys"
   # run install scripts
-  - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/scripts/k8s-node-setup.sh > ~/k8s-node-setup.sh"
+  - su - cloudinit -c "curl -s https://raw.githubusercontent.com/hsh00000/k8s/main/scripts/k8s-node-setup.sh > ~/k8s-node-setup.sh"
   - su - cloudinit -c "sudo bash ~/k8s-node-setup.sh ${vmname}"
   # change default shell to bash
   - chsh -s $(which bash) cloudinit
