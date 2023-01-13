@@ -21,10 +21,10 @@ VM_LIST=(
     # ---
     #vmid #vmname      #cpu #mem  #vmsrvip    #vmsanip     #targetip    #targethost
     "1001 k8s-controller-01 2    4096  192.168.100.121 192.168.8.121 192.168.100.1 prox01"
-    "1002 k8s-controller-02 2    4096  192.168.100.122 192.168.8.122 192.168.100.2 prox02"
+    "1002 k8s-controller-02 2    4096  192.168.100.122 192.168.8.122 192.168.100.1 prox01"
     "1003 k8s-controller-03 2    4096  192.168.100.123 192.168.8.123 192.168.100.3 prox03"
     "1101 k8s-worker-01 2    4096 192.168.100.131 192.168.8.151 192.168.100.1 prox01"
-    "1102 k8s-worker-02 2    4096 192.168.100.132 192.168.8.152 192.168.100.2 prox02"
+    "1102 k8s-worker-02 2    4096 192.168.100.132 192.168.8.152 192.168.100.1 prox01"
     "1103 k8s-worker-03 2    4096 192.168.100.133 192.168.8.153 192.168.100.3 prox03"
 )
 
@@ -39,7 +39,7 @@ VM_LIST=(
 # vmbr0=Service Network Segment (192.168.100.0/24)
 # vmbr1=Storage Network Segment (192.168.8.0/24)
 
-qm create $TEMPLATE_VMID --cores 2 --memory 4096 --net0 virtio,bridge=vmbr0 --net1 virtio,bridge=vmbr1,tag=8 --name k8s-node-template
+qm create $TEMPLATE_VMID --cores 2 --memory 4096 --net0 virtio,bridge=vmbr2 --net1 virtio,bridge=vmbr1,tag=8 --name k8s-node-template
 
 # import the downloaded disk to $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME storage
 qm importdisk $TEMPLATE_VMID jammy-server-cloudimg-amd64.img $TEMPLATE_BOOT_IMAGE_TARGET_VOLUME
