@@ -34,7 +34,7 @@ esac
 # region : set variables
 
 # Set global variables
-KUBE_API_SERVER_VIP=192.168.100.100
+KUBE_API_SERVER_VIP=192.168.100.120
 VIP_INTERFACE=ens19
 NODE_IPS=( 192.168.100.121 192.168.100.122 192.168.100.123 )
 EXTERNAL_KUBE_API_SERVER="$(tr -dc '[:lower:]' </dev/urandom | head -c 1)$(tr -dc '[:lower:]0-9' </dev/urandom | head -c 7)-api.k8s.com"
