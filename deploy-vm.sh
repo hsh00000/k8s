@@ -2,10 +2,10 @@
 
 # region : set variables
 TEMPLATE_VMID=9050
-CLOUDINIT_IMAGE_TARGET_VOLUME=QnapNFS
-TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
-BOOT_IMAGE_TARGET_VOLUME=qnapiscsi02
-SNIPPET_TARGET_VOLUME=QnapNFS
+CLOUDINIT_IMAGE_TARGET_VOLUME=TrueNAS-NFS
+TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=iscsi-102
+BOOT_IMAGE_TARGET_VOLUME=iscsi-102
+SNIPPET_TARGET_VOLUME=TrueNAS-NFS
 SNIPPET_TARGET_PATH=/mnt/pve/${SNIPPET_TARGET_VOLUME}/snippets
 REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/hsh00000/k8s/main"
 VM_LIST=(
@@ -22,10 +22,10 @@ VM_LIST=(
     #vmid #vmname      #cpu #mem  #vmsrvip    #vmsanip     #targetip    #targethost
     "1001 k8s-controller-01 2    4096  192.168.100.121 192.168.8.121 192.168.100.1 prox01"
     "1002 k8s-controller-02 2    4096  192.168.100.122 192.168.8.122 192.168.100.2 prox02"
-    "1003 k8s-controller-03 2    4096  192.168.100.123 192.168.8.123 192.168.100.2 prox02"
-    "1101 k8s-worker-01 2    4096 192.168.100.151 192.168.8.151 192.168.100.1 prox01"
-    "1102 k8s-worker-02 2    4096 192.168.100.152 192.168.8.152 192.168.100.2 prox02"
-    "1103 k8s-worker-03 2    4096 192.168.100.153 192.168.8.153 192.168.100.3 prox03"
+    "1003 k8s-controller-03 2    4096  192.168.100.123 192.168.8.123 192.168.100.2 prox03"
+    "1101 k8s-worker-01 2    4096 192.168.100.131 192.168.8.151 192.168.100.1 prox01"
+    "1102 k8s-worker-02 2    4096 192.168.100.132 192.168.8.152 192.168.100.2 prox02"
+    "1103 k8s-worker-03 2    4096 192.168.100.133 192.168.8.153 192.168.100.3 prox03"
 )
 
 # endregion
@@ -147,7 +147,7 @@ config:
       netmask: '255.255.255.0'
   - type: nameserver
     address:
-    - '192.168.100.254'
+    - '192.168.100.230'
     search:
     - 'local'
 EOF
