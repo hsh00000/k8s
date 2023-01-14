@@ -2,9 +2,9 @@
 k8s-controller-01 ansible_host=192.168.100.121
 k8s-controller-02 ansible_host=192.168.100.122
 k8s-controller-03 ansible_host=192.168.100.123
-k8s-worker-01 ansible_host=192.168.100.151
-k8s-worker-02 ansible_host=192.168.100.152
-k8s-worker-03 ansible_host=192.168.100.153
+k8s-worker-01 ansible_host=192.168.100.131
+k8s-worker-02 ansible_host=192.168.100.132
+k8s-worker-03 ansible_host=192.168.100.133
 
 [k8s-servers:vars]
 ansible_ssh_pass=zaq12wsx
@@ -42,9 +42,9 @@ ansible_ssh_private_key_file=/root/.ssh/id_ed25519
 
 
 [k8s-servers-wk-with-ssh]
-k8s-worker-01 ansible_host=192.168.100.151
-k8s-worker-02 ansible_host=192.168.100.152
-k8s-worker-03 ansible_host=192.168.100.153
+k8s-worker-01 ansible_host=192.168.100.131
+k8s-worker-02 ansible_host=192.168.100.132
+k8s-worker-03 ansible_host=192.168.100.133
 
 [k8s-servers-wk-with-ssh:vars]
 ansible_ssh_private_key_file=/root/.ssh/id_ed25519
